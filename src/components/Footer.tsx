@@ -86,15 +86,15 @@ export default function Footer({ onOpenLegal }: { onOpenLegal: (type: "privacy" 
 
             {/* Legal / More */}
             <div className="col-span-2 sm:col-span-1">
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-saffron mb-6">Explore</h4>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-saffron mb-6">{t.footer.explore}</h4>
               <ul className="space-y-4">
                 {[
-                  { name: "Privacy Policy", type: "privacy" },
-                  { name: "Terms of Use", type: "terms" },
-                  { name: "FAQ", type: "faq" },
-                  { name: "Contact Us", type: "contact" },
+                  { name: t.footer.legal.privacy, type: "privacy" },
+                  { name: t.footer.legal.terms, type: "terms" },
+                  { name: t.footer.legal.faq, type: "faq" },
+                  { name: t.footer.legal.contact, type: "contact" },
                 ].map((item) => (
-                  <li key={item.name}>
+                  <li key={item.type}>
                     <button 
                       onClick={() => onOpenLegal(item.type as any)}
                       className="text-sm font-medium text-foreground/70 hover:text-saffron transition-all hover:pl-2 cursor-pointer bg-transparent border-none p-0 text-left"

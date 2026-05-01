@@ -66,11 +66,11 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
               className="mb-12"
             >
               <h2 className="text-5xl font-serif font-bold leading-tight mb-4">
-                The <span className="italic">Voting</span> <br/>
-                <span className="gradient-text">Journey</span>
+                {t.journey.title} <br/>
+                <span className="gradient-text italic">{t.journey.titleAccent}</span>
               </h2>
               <p className="text-muted-foreground font-light text-lg">
-                Seven steps to exercise your democratic right in India.
+                {t.journey.subtitle}
               </p>
             </motion.div>
 
@@ -78,17 +78,17 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
               <div className="absolute left-4 top-0 bottom-0 w-px bg-border/50" />
               {JOURNEY_STEPS.map((step, i) => (
                 <button
-                  key={step.id}
-                  onClick={() => setActiveStep(i)}
-                  className={`group relative flex items-center w-full pl-10 py-3 text-left transition-all cursor-pointer ${
-                    activeStep === i ? "opacity-100" : "opacity-40 hover:opacity-100"
-                  }`}
+                   key={step.id}
+                   onClick={() => setActiveStep(i)}
+                   className={`group relative flex items-center w-full pl-10 py-3 text-left transition-all cursor-pointer ${
+                     activeStep === i ? "opacity-100" : "opacity-40 hover:opacity-100"
+                   }`}
                 >
                   <div className={`absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 rounded-full border-2 border-background transition-all ${
                     activeStep === i ? "bg-saffron scale-125 shadow-lg shadow-saffron/20" : "bg-border"
                   }`} />
                   <span className={`text-xs font-bold uppercase tracking-widest ${activeStep === i ? "text-foreground" : "text-muted-foreground"}`}>
-                    0{i + 1} — {t.journey.steps[i]?.title.split(" ").slice(-1)[0] || "Step"}
+                    0{i + 1} — {t.journey.steps[i]?.title.split(" ").slice(-1)[0] || t.journey.step}
                   </span>
                 </button>
               ))}
@@ -97,7 +97,7 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
             {/* Progress Counter */}
             <div className="mt-16 pt-8 border-t border-border/50">
               <div className="flex justify-between items-end mb-2">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Progress</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">{t.journey.progress}</span>
                 <span className="text-3xl font-serif font-bold">{Math.round(progress)}%</span>
               </div>
               <div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
@@ -143,7 +143,7 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
                 {/* Text Section */}
                 <div className="md:col-span-7 p-10 sm:p-14 flex flex-col">
                   <span className="text-[10px] font-black uppercase tracking-[0.4em] text-saffron mb-6">
-                    Step {activeStep + 1} of 7
+                    {t.journey.step} {activeStep + 1} {t.journey.of} 7
                   </span>
                   
                   <h3 className="text-4xl font-serif font-bold leading-tight mb-6">

@@ -19,8 +19,12 @@ export default function ElectionTimeline() {
     return "upcoming";
   };
 
-  const timelineWithStatus = ELECTION_TIMELINE.map((event) => ({
+  const timelineWithStatus = ELECTION_TIMELINE.map((event, index) => ({
     ...event,
+    // Use translated content if available, fallback to hardcoded constants
+    title: t.timeline.events[index]?.title || event.title,
+    date: t.timeline.events[index]?.date || event.date,
+    description: t.timeline.events[index]?.description || event.description,
     status: getEventStatus(event),
   }));
 
@@ -38,21 +42,25 @@ export default function ElectionTimeline() {
               className="sticky top-32"
             >
               <h2 className="text-6xl font-serif font-bold leading-[0.9] mb-6">
-                The <br/>
-                <span className="gradient-text italic">Countdown</span>
+                {t.timeline.countdownTitle} <br/>
+                <span className="gradient-text italic">{t.timeline.countdownAccent}</span>
               </h2>
               <p className="text-xl text-muted-foreground font-light leading-relaxed">
-                Stay updated with the official election schedule and key milestones.
+                {t.timeline.countdownSubtitle}
               </p>
               
               <div className="mt-12 space-y-4">
                  <div className="flex items-center gap-3">
                     <div className="h-2 w-2 rounded-full bg-green-500" />
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Milestone Reached</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
+                      {t.timeline.milestoneReached}
+                    </span>
                  </div>
                  <div className="flex items-center gap-3">
                     <div className="h-2 w-2 rounded-full bg-saffron animate-pulse" />
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">In Progress</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
+                      {t.timeline.inProgress}
+                    </span>
                  </div>
               </div>
             </motion.div>

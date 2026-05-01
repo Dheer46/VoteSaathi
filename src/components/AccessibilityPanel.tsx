@@ -31,7 +31,7 @@ export default function AccessibilityPanel() {
         transition={{ delay: 1.5 }}
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-20 left-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-muted/90 border border-border/50 shadow-lg hover:bg-muted transition-colors cursor-pointer"
-        title="Accessibility Settings"
+        title={t.accessibility.settingsTitle}
       >
         <Settings2 className="h-4.5 w-4.5 text-muted-foreground" />
       </motion.button>

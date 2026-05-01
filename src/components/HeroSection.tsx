@@ -84,7 +84,7 @@ export default function HeroSection({ onStartJourney, onOpenChat }: HeroSectionP
                 className="group relative h-16 px-8 bg-foreground text-background rounded-full overflow-hidden transition-all hover:scale-[1.02] active:scale-95"
               >
                 <span className="relative z-10 flex items-center gap-2 text-base font-bold">
-                  Start Your Journey <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  {t.hero.ctaStart} <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-saffron to-saffron-dark opacity-0 group-hover:opacity-100 transition-opacity" />
               </Button>
@@ -95,7 +95,7 @@ export default function HeroSection({ onStartJourney, onOpenChat }: HeroSectionP
                 size="lg"
                 className="h-16 px-8 rounded-full border-2 border-foreground/10 hover:bg-foreground/5 transition-all text-base font-bold"
               >
-                {t.nav.askAi}
+                {t.hero.ctaAsk}
               </Button>
             </motion.div>
 
@@ -106,15 +106,15 @@ export default function HeroSection({ onStartJourney, onOpenChat }: HeroSectionP
               transition={{ delay: 1.4 }}
               className="mt-16 flex items-center gap-8 border-t border-border/50 pt-8"
             >
-              <div>
-                <p className="text-3xl font-serif font-bold">950M+</p>
-                <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">Eligible Voters</p>
-              </div>
-              <div className="w-px h-10 bg-border" />
-              <div>
-                <p className="text-3xl font-serif font-bold">1M+</p>
-                <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">Polling Stations</p>
-              </div>
+              {t.hero.stats.slice(0, 2).map((stat, i) => (
+                <div key={i} className="flex items-center gap-8">
+                  <div>
+                    <p className="text-3xl font-serif font-bold">{stat.value}</p>
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">{stat.label}</p>
+                  </div>
+                  {i === 0 && <div className="w-px h-10 bg-border" />}
+                </div>
+              ))}
             </motion.div>
           </div>
         </div>

@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Shield, FileText, HelpCircle, Mail } from "lucide-react";
 import { useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface LegalOverlayProps {
   isOpen: boolean;
@@ -11,6 +12,8 @@ interface LegalOverlayProps {
 }
 
 export default function LegalOverlay({ isOpen, onClose, type }: LegalOverlayProps) {
+  const { t } = useLanguage();
+
   // Prevent scroll when open
   useEffect(() => {
     if (isOpen) {
@@ -22,64 +25,51 @@ export default function LegalOverlay({ isOpen, onClose, type }: LegalOverlayProp
   }, [isOpen]);
 
   const getContent = () => {
+    if (!type) return null;
+    
+    const legal = t.legalContent;
+    
     switch (type) {
       case "privacy":
         return {
-          title: "Privacy Manifesto",
-          subtitle: "How we protect your civic data",
+          title: legal.privacy.title,
+          subtitle: legal.privacy.subtitle,
           icon: Shield,
           content: (
             <div className="space-y-8 font-light leading-relaxed text-muted-foreground">
-              <section>
-                <h3 className="text-xl font-serif font-bold text-foreground mb-4">01. Data Philosophy</h3>
-                <p>VoteSaathi is built on the principle of minimal data footprint. We do not store your personal identity, EPIC numbers, or private conversations beyond the immediate session required for AI processing.</p>
-              </section>
-              <section>
-                <h3 className="text-xl font-serif font-bold text-foreground mb-4">02. AI Processing</h3>
-                <p>Your queries are processed using encrypted channels. While we use third-party AI models (like Groq/Llama), your data is treated as transient and is not used for training global models without explicit consent.</p>
-              </section>
-              <section>
-                <h3 className="text-xl font-serif font-bold text-foreground mb-4">03. Cookie Usage</h3>
-                <p>We only use essential technical cookies to remember your language preference and ensure the stability of the AI digital concierge.</p>
-              </section>
+              {legal.privacy.sections.map((section, i) => (
+                <section key={i}>
+                  <h3 className="text-xl font-serif font-bold text-foreground mb-4">{section.title}</h3>
+                  <p>{section.content}</p>
+                </section>
+              ))}
             </div>
           )
         };
       case "terms":
         return {
-          title: "Terms of Engagement",
-          subtitle: "The rules of our digital forum",
+          title: legal.terms.title,
+          subtitle: legal.terms.subtitle,
           icon: FileText,
           content: (
             <div className="space-y-8 font-light leading-relaxed text-muted-foreground">
-              <section>
-                <h3 className="text-xl font-serif font-bold text-foreground mb-4">01. Information Accuracy</h3>
-                <p>While VoteSaathi strives for 100% accuracy using official ECI data, our AI may occasionally provide generalized information. Always cross-verify critical voting details with the official Voter Helpline.</p>
-              </section>
-              <section>
-                <h3 className="text-xl font-serif font-bold text-foreground mb-4">02. Civic Responsibility</h3>
-                <p>Users are expected to use this platform for legitimate civic education. Any attempt to use the AI to spread misinformation or disrupt the democratic process will result in immediate session termination.</p>
-              </section>
-              <section>
-                <h3 className="text-xl font-serif font-bold text-foreground mb-4">03. No Legal Advice</h3>
-                <p>The information provided by VoteSaathi is for educational purposes only and does not constitute legal advice regarding election law or eligibility disputes.</p>
-              </section>
+              {legal.terms.sections.map((section, i) => (
+                <section key={i}>
+                  <h3 className="text-xl font-serif font-bold text-foreground mb-4">{section.title}</h3>
+                  <p>{section.content}</p>
+                </section>
+              ))}
             </div>
           )
         };
       case "faq":
         return {
-          title: "Common Inquiries",
-          subtitle: "Frequently asked questions",
+          title: legal.faq.title,
+          subtitle: legal.faq.subtitle,
           icon: HelpCircle,
           content: (
             <div className="space-y-6">
-              {[
-                { q: "Is VoteSaathi an official ECI app?", a: "No, VoteSaathi is an independent AI-powered assistant designed to make ECI information more accessible and understandable." },
-                { q: "Do I need my physical ID to vote?", a: "While the EPIC (Voter ID) card is preferred, you can vote with any of the 12 approved photo IDs if your name is in the electoral roll." },
-                { q: "How do I update my address?", a: "You can use Form 8 on the official ECI portal to update your address or other voter details." },
-                { q: "Can I vote if I'm currently abroad?", a: "Yes, Indian citizens living abroad can register as 'Overseas Electors' using Form 6A." }
-              ].map((item, i) => (
+              {legal.faq.questions.map((item, i) => (
                 <div key={i} className="p-6 rounded-2xl bg-muted/30 border border-border/50">
                   <h4 className="font-serif font-bold text-foreground mb-2">Q: {item.q}</h4>
                   <p className="text-sm text-muted-foreground font-light">{item.a}</p>
@@ -90,19 +80,19 @@ export default function LegalOverlay({ isOpen, onClose, type }: LegalOverlayProp
         };
       case "contact":
         return {
-          title: "Digital Contact",
-          subtitle: "Get in touch with the team",
+          title: legal.contact.title,
+          subtitle: legal.contact.subtitle,
           icon: Mail,
           content: (
             <div className="space-y-8">
-              <p className="text-lg font-light text-muted-foreground">Have feedback or want to partner with us? We'd love to hear from you.</p>
+              <p className="text-lg font-light text-muted-foreground">{legal.contact.description}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <a href="mailto:hello@votesaathi.in" className="p-6 rounded-2xl border border-border hover:border-saffron transition-all group">
-                  <span className="block text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-2">Email Us</span>
+                  <span className="block text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-2">{legal.contact.emailLabel}</span>
                   <span className="text-xl font-serif font-bold text-foreground group-hover:text-saffron transition-colors">hello@votesaathi.in</span>
                 </a>
                 <div className="p-6 rounded-2xl border border-border">
-                  <span className="block text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-2">Socials</span>
+                  <span className="block text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-2">{legal.contact.socialsLabel}</span>
                   <div className="flex gap-4">
                     <a href="#" className="text-sm font-bold text-foreground hover:text-saffron transition-colors underline decoration-saffron/20">Twitter</a>
                     <a href="#" className="text-sm font-bold text-foreground hover:text-saffron transition-colors underline decoration-saffron/20">LinkedIn</a>
@@ -110,9 +100,9 @@ export default function LegalOverlay({ isOpen, onClose, type }: LegalOverlayProp
                 </div>
               </div>
               <form className="space-y-4 pt-8 border-t border-border">
-                <input type="text" placeholder="Name" className="w-full bg-muted/50 border-none rounded-xl py-4 px-6 text-sm outline-none focus:ring-2 focus:ring-saffron/20" />
-                <textarea placeholder="Message" rows={4} className="w-full bg-muted/50 border-none rounded-xl py-4 px-6 text-sm outline-none focus:ring-2 focus:ring-saffron/20" />
-                <button type="submit" className="w-full bg-foreground text-background py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-saffron transition-colors cursor-pointer">Send Message</button>
+                <input type="text" placeholder={legal.contact.namePlaceholder} className="w-full bg-muted/50 border-none rounded-xl py-4 px-6 text-sm outline-none focus:ring-2 focus:ring-saffron/20" />
+                <textarea placeholder={legal.contact.messagePlaceholder} rows={4} className="w-full bg-muted/50 border-none rounded-xl py-4 px-6 text-sm outline-none focus:ring-2 focus:ring-saffron/20" />
+                <button type="submit" className="w-full bg-foreground text-background py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-saffron transition-colors cursor-pointer">{legal.contact.sendButton}</button>
               </form>
             </div>
           )

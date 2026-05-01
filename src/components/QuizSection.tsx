@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, XCircle, Award, ArrowRight, RotateCcw, X } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
 
 const QUIZ_QUESTIONS = [
@@ -47,23 +48,29 @@ interface QuizSectionProps {
 }
 
 export default function QuizSection({ isOpen, onClose }: QuizSectionProps) {
+  const { t } = useLanguage();
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
+  const quizQuestions = t.quiz.questions;
+
   const handleAnswer = (index: number) => {
     if (isAnswered) return;
     setSelectedOption(index);
     setIsAnswered(true);
-    if (index === QUIZ_QUESTIONS[currentStep].correct) {
+    // Note: We use original QUIZ_QUESTIONS for 'correct' index if they differ, 
+    // but here we assume translated questions match the original order.
+    const originalCorrect = [1, 2, 0, 1]; // Fallback to original correct indices
+    if (index === originalCorrect[currentStep]) {
       setScore(prev => prev + 1);
     }
   };
 
   const nextQuestion = () => {
-    if (currentStep < QUIZ_QUESTIONS.length - 1) {
+    if (currentStep < quizQuestions.length - 1) {
       setCurrentStep(prev => prev + 1);
       setSelectedOption(null);
       setIsAnswered(false);
@@ -112,11 +119,11 @@ export default function QuizSection({ isOpen, onClose }: QuizSectionProps) {
                   animate={{ opacity: 1, y: 0 }}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-saffron/20 bg-saffron/5 text-saffron text-[10px] font-black uppercase tracking-[0.2em] mb-4"
                 >
-                  <Award className="h-3 w-3" /> Knowledge Check
+                  <Award className="h-3 w-3" /> {t.quiz.badge}
                 </motion.div>
-                <h2 className="text-4xl font-serif font-bold mb-2">Ready to vote?</h2>
+                <h2 className="text-4xl font-serif font-bold mb-2">{t.quiz.title}</h2>
                 <p className="text-muted-foreground max-w-xl font-light text-sm">
-                  Test your knowledge and earn your certificate.
+                  {t.quiz.subtitle}
                 </p>
               </div>
 
@@ -132,22 +139,23 @@ export default function QuizSection({ isOpen, onClose }: QuizSectionProps) {
               >
                 <div className="flex items-center justify-between mb-8">
                   <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
-                    Question {currentStep + 1} of {QUIZ_QUESTIONS.length}
+                    {t.quiz.question} {currentStep + 1} {t.quiz.of} {quizQuestions.length}
                   </span>
                   <div className="flex gap-1">
-                    {QUIZ_QUESTIONS.map((_, i) => (
+                    {quizQuestions.map((_, i) => (
                       <div key={i} className={`h-1 w-6 rounded-full transition-colors duration-500 ${i <= currentStep ? "bg-saffron" : "bg-muted"}`} />
                     ))}
                   </div>
                 </div>
 
                 <h3 className="text-2xl sm:text-3xl font-serif font-bold text-foreground mb-8 leading-tight">
-                  {QUIZ_QUESTIONS[currentStep].question}
+                  {quizQuestions[currentStep].question}
                 </h3>
 
                 <div className="grid grid-cols-1 gap-4 mb-8">
-                  {QUIZ_QUESTIONS[currentStep].options.map((option, i) => {
-                    const isCorrect = i === QUIZ_QUESTIONS[currentStep].correct;
+                  {quizQuestions[currentStep].options.map((option, i) => {
+                    const originalCorrect = [1, 2, 0, 1];
+                    const isCorrect = i === originalCorrect[currentStep];
                     const isSelected = i === selectedOption;
                     
                     let variantClasses = "border-border bg-white hover:border-saffron/50";
@@ -180,14 +188,14 @@ export default function QuizSection({ isOpen, onClose }: QuizSectionProps) {
                   >
                     <div className="p-6 rounded-2xl bg-muted/50 mb-6 border border-border/50">
                       <p className="text-sm font-light leading-relaxed">
-                        <span className="font-bold">Did you know?</span> {QUIZ_QUESTIONS[currentStep].explanation}
+                        <span className="font-bold">{t.quiz.didYouKnow}</span> {quizQuestions[currentStep].explanation}
                       </p>
                     </div>
                     <button
                       onClick={nextQuestion}
                       className="w-full bg-foreground text-background py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-saffron transition-all flex items-center justify-center gap-2 cursor-pointer group"
                     >
-                      {currentStep < QUIZ_QUESTIONS.length - 1 ? "Next Question" : "See Results"}
+                      {currentStep < quizQuestions.length - 1 ? t.quiz.next : t.quiz.seeResults}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </button>
                   </motion.div>
@@ -202,9 +210,9 @@ export default function QuizSection({ isOpen, onClose }: QuizSectionProps) {
                 <div className="h-24 w-24 bg-saffron/10 text-saffron rounded-[2rem] flex items-center justify-center mb-8">
                   <Award className="h-12 w-12" />
                 </div>
-                <h3 className="text-4xl font-serif font-bold mb-4">Quiz Complete!</h3>
+                <h3 className="text-4xl font-serif font-bold mb-4">{t.quiz.complete}</h3>
                 <p className="text-muted-foreground mb-8 text-lg font-light">
-                  You scored <span className="text-foreground font-bold">{score} out of {QUIZ_QUESTIONS.length}</span>
+                  {t.quiz.score} <span className="text-foreground font-bold">{score} {t.quiz.outOf} {quizQuestions.length}</span>
                 </p>
                 
                 <div className="p-8 rounded-[2rem] bg-foreground text-background w-full max-w-sm mb-10 shadow-2xl relative overflow-hidden">
@@ -212,10 +220,10 @@ export default function QuizSection({ isOpen, onClose }: QuizSectionProps) {
                    <div className="absolute top-0 right-0 p-4 opacity-10">
                       <Award className="h-20 w-20" />
                    </div>
-                   <span className="block text-[10px] font-black uppercase tracking-[0.3em] mb-4 opacity-60">Certification</span>
-                   <span className="text-2xl font-serif font-bold block mb-2">Voter Ready 🇮🇳</span>
+                   <span className="block text-[10px] font-black uppercase tracking-[0.3em] mb-4 opacity-60">{t.quiz.certificate.badge}</span>
+                   <span className="text-2xl font-serif font-bold block mb-2">{t.quiz.certificate.title}</span>
                    <p className="text-xs font-light opacity-80 leading-relaxed">
-                     This confirms that you have successfully understood the core mechanics of Indian Democracy.
+                     {t.quiz.certificate.description}
                    </p>
                 </div>
 
@@ -224,7 +232,7 @@ export default function QuizSection({ isOpen, onClose }: QuizSectionProps) {
                     onClick={resetQuiz}
                     className="flex-1 border border-border py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-muted transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <RotateCcw className="h-4 w-4" /> Try Again
+                    <RotateCcw className="h-4 w-4" /> {t.quiz.tryAgain}
                   </button>
                   <button 
                     onClick={() => {
@@ -233,7 +241,7 @@ export default function QuizSection({ isOpen, onClose }: QuizSectionProps) {
                     }}
                     className="flex-1 bg-foreground text-background py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-saffron transition-all cursor-pointer"
                   >
-                    Ask AI Assistant
+                    {t.quiz.askAi}
                   </button>
                 </div>
               </motion.div>

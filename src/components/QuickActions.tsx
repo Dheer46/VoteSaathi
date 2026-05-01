@@ -32,7 +32,7 @@ export default function QuickActions() {
             className="hidden lg:block pb-2"
           >
              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground border-b border-border pb-2">
-                One-Tap Solutions
+                {t.actions.oneTap}
              </span>
           </motion.div>
         </div>
@@ -40,6 +40,8 @@ export default function QuickActions() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {QUICK_ACTIONS.map((action, i) => {
             const Icon = action.icon;
+            const translatedItem = t.actions.items[i];
+            
             return (
               <motion.button
                 key={action.id}
@@ -73,12 +75,16 @@ export default function QuickActions() {
                   <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-muted/50 transition-all duration-500 group-hover:bg-foreground group-hover:text-background`}>
                     <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mt-8 text-2xl font-serif font-bold text-foreground leading-tight">{action.title}</h3>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed font-light">{action.description}</p>
+                  <h3 className="mt-8 text-2xl font-serif font-bold text-foreground leading-tight">
+                    {translatedItem?.title || action.title}
+                  </h3>
+                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed font-light">
+                    {translatedItem?.description || action.description}
+                  </p>
                 </div>
 
                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-saffron opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
-                  Launch Action <ArrowUpRight className="h-3 w-3" />
+                  {t.actions.launchAction} <ArrowUpRight className="h-3 w-3" />
                 </div>
               </motion.button>
             );

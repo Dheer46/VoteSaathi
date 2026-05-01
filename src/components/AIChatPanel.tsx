@@ -202,9 +202,9 @@ export default function AIChatPanel() {
           >
             <Sparkles className="h-8 w-8" />
           </motion.div>
-          <h2 className="text-5xl font-serif font-bold mb-4">The <span className="italic">Digital</span> Concierge</h2>
+          <h2 className="text-5xl font-serif font-bold mb-4">{t.ai.title} <span className="italic">{t.ai.titleAccent}</span> Concierge</h2>
           <p className="text-muted-foreground max-w-xl font-light">
-            Your private guide to the world's largest democratic process. Ask anything, in any language.
+            {t.ai.subtitle}
           </p>
         </div>
 
