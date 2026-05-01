@@ -1,11 +1,9 @@
 # 🗳️ VoteSaathi AI — Your Personal Voting Guide 🇮🇳
 
-<div align="center">
-  <img src="public/images/hero-bg.png" width="800" alt="VoteSaathi Header" />
-  <p align="center">
-    <b>Empowering 950 million voters with artificial intelligence and elegant design.</b>
-  </p>
-</div>
+<p align="center">
+  <b>Empowering 950 million voters with artificial intelligence and elegant design.</b>
+</p>
+
 
 [![GitHub Stars](https://img.shields.io/github/stars/Dheer46/VoteSaathi?style=for-the-badge&color=orange)](https://github.com/Dheer46/VoteSaathi/stargazers)
 [![License](https://img.shields.io/github/license/Dheer46/VoteSaathi?style=for-the-badge&color=green)](LICENSE)
