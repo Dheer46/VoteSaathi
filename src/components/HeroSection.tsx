@@ -1,17 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, ArrowRight, ChevronRight } from "lucide-react";
+import { Sparkles, ArrowRight, ChevronRight, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface HeroSectionProps {
   onStartJourney: () => void;
   onOpenChat: () => void;
+  onOpenVoice: () => void;
 }
 
-export default function HeroSection({ onStartJourney, onOpenChat }: HeroSectionProps) {
-  const { t } = useLanguage();
+export default function HeroSection({ onStartJourney, onOpenChat, onOpenVoice }: HeroSectionProps) {
+  const { t, language } = useLanguage();
 
   return (
     <section className="relative min-h-[95vh] flex items-center pt-24 pb-16 overflow-hidden noise">
@@ -72,32 +73,55 @@ export default function HeroSection({ onStartJourney, onOpenChat }: HeroSectionP
             </motion.p>
 
             {/* High-Impact Actions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 }}
-              className="flex flex-col sm:flex-row gap-6"
-            >
-              <Button
-                onClick={onStartJourney}
-                size="lg"
-                className="group relative h-16 px-8 bg-foreground text-background rounded-full overflow-hidden transition-all hover:scale-[1.02] active:scale-95"
+            <div className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 }}
+                className="flex flex-col sm:flex-row gap-6"
               >
-                <span className="relative z-10 flex items-center gap-2 text-base font-bold">
-                  {t.hero.ctaStart} <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-saffron to-saffron-dark opacity-0 group-hover:opacity-100 transition-opacity" />
-              </Button>
+                <Button
+                  onClick={onStartJourney}
+                  size="lg"
+                  className="group relative h-16 px-8 bg-foreground text-background rounded-full overflow-hidden transition-all hover:scale-[1.02] active:scale-95"
+                >
+                  <span className="relative z-10 flex items-center gap-2 text-base font-bold">
+                    {t.hero.ctaStart} <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-saffron to-saffron-dark opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Button>
 
-              <Button
-                onClick={onOpenChat}
-                variant="outline"
-                size="lg"
-                className="h-16 px-8 rounded-full border-2 border-foreground/10 hover:bg-foreground/5 transition-all text-base font-bold"
+                <Button
+                  onClick={onOpenChat}
+                  variant="outline"
+                  size="lg"
+                  className="h-16 px-8 rounded-full border-2 border-foreground/10 hover:bg-foreground/5 transition-all text-base font-bold"
+                >
+                  {t.hero.ctaAsk}
+                </Button>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2 }}
               >
-                {t.hero.ctaAsk}
-              </Button>
-            </motion.div>
+                <Button
+                  onClick={onOpenVoice}
+                  variant="default"
+                  size="lg"
+                  className="h-16 w-full sm:w-auto px-10 rounded-full bg-saffron hover:bg-saffron-dark text-white shadow-xl shadow-saffron/20 border-none transition-all flex items-center justify-center gap-3 group"
+                >
+                  <div className="relative">
+                    <Mic className="h-6 w-6 relative z-10" />
+                    <span className="absolute inset-0 bg-white/20 rounded-full animate-ping group-hover:hidden" />
+                  </div>
+                  <span className="text-lg font-black uppercase tracking-widest">
+                    {language === "hi" ? "आवाज मोड शुरू करें" : "Enter Voice Mode"}
+                  </span>
+                </Button>
+              </motion.div>
+            </div>
 
             {/* Trust Markers */}
             <motion.div

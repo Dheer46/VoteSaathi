@@ -12,6 +12,7 @@ import AccessibilityPanel from "@/components/AccessibilityPanel";
 import Footer from "@/components/Footer";
 import LegalOverlay from "@/components/LegalOverlay";
 import LanguageSelection from "@/components/LanguageSelection";
+import VoiceMode from "@/components/VoiceMode";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
   const [legalType, setLegalType] = useState<"privacy" | "terms" | "faq" | "contact" | null>(null);
 
   const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const [isVoiceOpen, setIsVoiceOpen] = useState(false);
 
   const openChat = useCallback(() => {
     document.getElementById("assistant")?.scrollIntoView({ behavior: "smooth" });
@@ -37,7 +39,11 @@ export default function Home() {
   return (
     <main className="flex-1">
       <Navbar />
-      <HeroSection onStartJourney={scrollToJourney} onOpenChat={openChat} />
+      <HeroSection 
+        onStartJourney={scrollToJourney} 
+        onOpenChat={openChat} 
+        onOpenVoice={() => setIsVoiceOpen(true)} 
+      />
       <JourneyFlow onComplete={() => setIsQuizOpen(true)} />
       <ElectionTimeline />
       <QuickActions />
@@ -52,6 +58,10 @@ export default function Home() {
       <QuizSection 
         isOpen={isQuizOpen} 
         onClose={() => setIsQuizOpen(false)} 
+      />
+      <VoiceMode 
+        isOpen={isVoiceOpen} 
+        onClose={() => setIsVoiceOpen(false)} 
       />
     </main>
   );
