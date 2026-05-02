@@ -143,6 +143,7 @@ export default function VoiceMode({ isOpen, onClose }: VoiceModeProps) {
   const synthRef = useRef<SpeechSynthesisUtterance | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const lastAssistantText = useRef("");
+  const currentAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // ── Helpers ──
   const stopEverything = useCallback(() => {
@@ -153,6 +154,12 @@ export default function VoiceMode({ isOpen, onClose }: VoiceModeProps) {
       mediaRecorderRef.current.stop();
     }
     window.speechSynthesis?.cancel();
+    
+    if (currentAudioRef.current) {
+      currentAudioRef.current.pause();
+      currentAudioRef.current.currentTime = 0;
+      currentAudioRef.current = null;
+    }
     setVoiceState("idle");
     setLiveCaption("");
   }, []);
@@ -181,11 +188,25 @@ export default function VoiceMode({ isOpen, onClose }: VoiceModeProps) {
 
       const data = await res.json();
       if (data.audioContent) {
+        if (currentAudioRef.current) {
+          currentAudioRef.current.pause();
+        }
         const audio = new Audio(`data:audio/mp3;base64,${data.audioContent}`);
+        currentAudioRef.current = audio;
         audio.playbackRate = speechRate;
-        audio.onended = () => setVoiceState("idle");
-        audio.onerror = () => setVoiceState("idle");
-        audio.play();
+        audio.onended = () => {
+          if (currentAudioRef.current === audio) {
+            setVoiceState("idle");
+            currentAudioRef.current = null;
+          }
+        };
+        audio.onerror = () => {
+          if (currentAudioRef.current === audio) {
+            setVoiceState("idle");
+            currentAudioRef.current = null;
+          }
+        };
+        audio.play().catch(e => console.error("Audio play error:", e));
       } else {
         throw new Error(data.error || "No audio content");
       }
@@ -366,12 +387,22 @@ RULES:
 
     if (voiceState === "speaking") {
       window.speechSynthesis?.cancel();
+      if (currentAudioRef.current) {
+        currentAudioRef.current.pause();
+        currentAudioRef.current.currentTime = 0;
+        currentAudioRef.current = null;
+      }
       setVoiceState("idle");
       return;
     }
 
     try {
       window.speechSynthesis?.cancel();
+      if (currentAudioRef.current) {
+        currentAudioRef.current.pause();
+        currentAudioRef.current.currentTime = 0;
+        currentAudioRef.current = null;
+      }
       console.log("Requesting mic access...");
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       
@@ -491,7 +522,15 @@ RULES:
             {/* Mute Toggle */}
             <button
               onClick={() => {
-                if (!isMuted) window.speechSynthesis?.cancel();
+                if (!isMuted) {
+                  window.speechSynthesis?.cancel();
+                  if (currentAudioRef.current) {
+                    currentAudioRef.current.pause();
+                    currentAudioRef.current.currentTime = 0;
+                    currentAudioRef.current = null;
+                  }
+                  setVoiceState("idle");
+                }
                 setIsMuted(!isMuted);
               }}
               className="voice-control-btn"
