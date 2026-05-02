@@ -28,9 +28,13 @@ export default function Footer({ onOpenLegal }: { onOpenLegal: (type: "privacy" 
               {t.footer.description}
             </p>
             <div className="flex items-center gap-6">
-              {[Globe, Mail, MessageSquare].map((Icon, i) => (
-                <a key={i} href="#" className="h-10 w-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-300">
-                  <Icon className="h-5 w-5" />
+              {[
+                { Icon: Globe, label: "Website" },
+                { Icon: Mail, label: "Email" },
+                { Icon: MessageSquare, label: "Message" }
+              ].map(({ Icon, label }, i) => (
+                <a key={i} href="#" aria-label={label} className="h-10 w-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-300">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
                 </a>
               ))}
             </div>
