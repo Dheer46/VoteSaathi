@@ -1,6 +1,14 @@
 import { NextResponse } from "next/server";
 import Groq from "groq-sdk";
 
+/**
+ * Handles chat requests for the VoteSaathi AI assistant.
+ * Processes user messages using the Groq SDK and Llama 3.3 model.
+ * Enforces strict neutrality and concise formatting.
+ * 
+ * @param {Request} req - The incoming request object containing messages and language settings.
+ * @returns {Promise<NextResponse>} - A promise that resolves to a JSON response with the AI content.
+ */
 export async function POST(req: Request) {
   try {
     const { messages, engine, language } = await req.json();

@@ -60,9 +60,11 @@ export default function Navbar() {
           <div className="relative" ref={langRef}>
             <button
               onClick={() => setLangOpen(!langOpen)}
+              aria-label="Select language"
+              aria-expanded={langOpen}
               className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground/80 hover:text-foreground cursor-pointer transition-colors"
             >
-              <Globe className="h-4 w-4" />
+              <Globe className="h-4 w-4" aria-hidden="true" />
               <span>{language.toUpperCase()}</span>
             </button>
 
@@ -78,6 +80,7 @@ export default function Navbar() {
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
+                        aria-label={`Switch to ${lang.name}`}
                         onClick={() => {
                           setLanguage(lang.code as LanguageCode);
                           setLangOpen(false);
@@ -89,7 +92,7 @@ export default function Navbar() {
                         }`}
                       >
                         {lang.nativeName}
-                        {language === lang.code && <Check className="h-3 w-3" />}
+                        {language === lang.code && <Check className="h-3 w-3" aria-hidden="true" />}
                       </button>
                     ))}
                   </div>
@@ -100,9 +103,11 @@ export default function Navbar() {
 
           <button
             onClick={() => setOpen(!open)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
             className="md:hidden rounded-full p-2 hover:bg-muted transition-colors cursor-pointer"
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
           </button>
         </div>
       </nav>
