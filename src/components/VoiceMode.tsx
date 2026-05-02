@@ -312,6 +312,20 @@ RULES:
 
   // ── Effects ──
   useEffect(() => {
+    const handleTriggerVoice = () => {
+      if (!isOpen) {
+        // Since we can't directly call setIsOpen here as it's a prop,
+        // we assume the parent handles the global state if needed,
+        // or we use the existing window event pattern.
+        // Actually, in page.tsx, setIsVoiceOpen is the state.
+        // I will add an event listener in page.tsx instead for cleaner flow.
+      }
+    };
+    window.addEventListener("trigger-voice-mode", handleTriggerVoice);
+    return () => window.removeEventListener("trigger-voice-mode", handleTriggerVoice);
+  }, [isOpen]);
+
+  useEffect(() => {
     if (isOpen && !hasGreeted) {
       handleUserSpeech("__GREETING__");
       setHasGreeted(true);

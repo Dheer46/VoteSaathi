@@ -32,6 +32,12 @@ export default function Home() {
     document.getElementById("assistant")?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  useEffect(() => {
+    const handleVoiceTrigger = () => setIsVoiceOpen(true);
+    window.addEventListener("trigger-voice-mode", handleVoiceTrigger);
+    return () => window.removeEventListener("trigger-voice-mode", handleVoiceTrigger);
+  }, []);
+
   if (!isLanguageSelected) {
     return <LanguageSelection />;
   }

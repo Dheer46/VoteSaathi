@@ -147,6 +147,34 @@
     margin-bottom: 0.75rem !important;
   }
 
+  /* Accessibility Modes */
+  .text-large {
+    font-size: 1.15rem;
+  }
+  .text-large h1 { font-size: 1.25em; }
+  .text-large h2 { font-size: 1.25em; }
+  .text-large h3 { font-size: 1.25em; }
+  .text-large p { font-size: 1.1em; }
+  .text-large button { font-size: 1.1em; }
+  .text-large span { font-size: 1.1em; }
+
+  .high-contrast {
+    --color-background: #000000;
+    --color-foreground: #ffffff;
+    --color-muted: #111111;
+    --color-muted-foreground: #eeeeee;
+    --color-border: #ffffff;
+    --color-saffron: #ffff00;
+    --color-green-india: #00ff00;
+    --color-blue-ashoka: #00ffff;
+  }
+  .high-contrast .glass {
+    @apply bg-black border-2 border-white backdrop-blur-none;
+  }
+  .high-contrast button {
+    @apply border-2 border-white;
+  }
+
   /* ──────────────────────────────────────────────────── */
   /*  Voice Mode                                          */
   /* ──────────────────────────────────────────────────── */
