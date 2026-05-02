@@ -27,7 +27,7 @@ export default function HeroSection({ onStartJourney, onOpenChat, onOpenVoice }:
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-20 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
           <div className="max-w-2xl">
             {/* Elegant Badge */}
             <motion.div

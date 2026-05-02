@@ -56,7 +56,7 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
   return (
     <section id="journey" className="py-20 sm:py-32 bg-white overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start w-full">
           
           {/* Sidebar Navigation - Editorial Style */}
           <div className="lg:col-span-4 lg:sticky lg:top-32 mb-12 lg:mb-0">
@@ -120,7 +120,7 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -30 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="grid md:grid-cols-12 gap-0 overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border border-border shadow-2xl shadow-black/5 bg-white"
+                className="grid grid-cols-1 md:grid-cols-12 gap-0 overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border border-border shadow-2xl shadow-black/5 bg-white w-full"
               >
                 {/* Image Section */}
                 <div className="md:col-span-5 relative min-h-[250px] md:min-h-full overflow-hidden bg-muted">

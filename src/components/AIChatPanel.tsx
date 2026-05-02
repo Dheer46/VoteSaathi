@@ -208,7 +208,7 @@ export default function AIChatPanel() {
           </p>
         </div>
 
-        <div className={`mx-auto transition-all duration-700 ease-[0.16,1,0.3,1] ${isExpanded ? "max-w-6xl h-[700px] lg:h-[800px]" : "max-w-4xl h-[550px] sm:h-[650px]"} relative`}>
+        <div className={`mx-auto w-full transition-all duration-700 ease-[0.16,1,0.3,1] ${isExpanded ? "max-w-6xl h-[700px] lg:h-[800px]" : "max-w-4xl h-[550px] sm:h-[650px]"} relative`}>
           <div className="glass h-full rounded-[1.5rem] sm:rounded-[2.5rem] flex flex-col overflow-hidden border-black/5 shadow-2xl">
             {/* Chat Header */}
             <div className="p-6 border-b border-black/5 flex items-center justify-between bg-white/50">
