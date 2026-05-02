@@ -71,6 +71,7 @@ export interface Translation {
     voice: string;
     voiceDesc: string;
     settingsTitle: string;
+    reset: string;
   };
   legalContent: {
     privacy: {
@@ -118,6 +119,7 @@ export interface Translation {
     welcome: string;
     placeholder: string;
     suggested: string;
+    prompts: string[];
     title: string;
     titleAccent: string;
     subtitle: string;
@@ -302,6 +304,7 @@ export const translations: Record<LanguageCode, Translation> = {
       voice: "Voice Narration",
       voiceDesc: "Read content aloud",
       settingsTitle: "Accessibility Settings",
+      reset: "Reset Settings",
     },
     legalContent: {
       privacy: {
@@ -553,6 +556,7 @@ export const translations: Record<LanguageCode, Translation> = {
       voice: "आवाज वर्णन",
       voiceDesc: "सामग्री को जोर से पढ़ें",
       settingsTitle: "अभिगम्यता सेटिंग्स",
+      reset: "सेटिंग्स रीसेट करें",
     },
     legalContent: {
       privacy: {
@@ -801,7 +805,8 @@ export const translations: Record<LanguageCode, Translation> = {
       highContrastDesc: "மாறுபாட்டை அதிகரிக்கவும்",
       voice: "குரல் விவரிப்பு",
       voiceDesc: "உள்ளடக்கத்தை சத்தமாக வாசிக்கவும்",
-      settingsTitle: "Accessibility Settings",
+      settingsTitle: "அணுகல்தன்மை அமைப்புகள்",
+      reset: "அமைப்புகளை மீட்டமை",
     },
     legalContent: {
       privacy: {
@@ -1050,7 +1055,8 @@ export const translations: Record<LanguageCode, Translation> = {
       highContrastDesc: "కాంట్రాస్ట్‌ని పెంచండి",
       voice: "వాయిస్ నరేషన్",
       voiceDesc: "కంటెంట్‌ను బిగ్గరగా చదవండి",
-      settingsTitle: "Accessibility Settings",
+      settingsTitle: "యాక్సెసిబిలిటీ సెట్టింగ్‌లు",
+      reset: "సెట్టింగ్‌లను రీసెట్ చేయండి",
     },
     legalContent: {
       privacy: {
@@ -1299,7 +1305,8 @@ export const translations: Record<LanguageCode, Translation> = {
       highContrastDesc: "বৈসাদৃশ্য বাড়ান",
       voice: "ভয়েস বর্ণনা",
       voiceDesc: "বিষয়বস্তু জোরে পড়ুন",
-      settingsTitle: "Accessibility Settings",
+      settingsTitle: "অ্যাক্সেসিবিলিটি সেটিংস",
+      reset: "সেটিংস রিসেট করুন",
     },
     legalContent: {
       privacy: {
@@ -1548,7 +1555,8 @@ export const translations: Record<LanguageCode, Translation> = {
       highContrastDesc: "कॉन्ट्रास्ट वाढवा",
       voice: "व्हॉइस नरेशन",
       voiceDesc: "मजकूर मोठ्याने वाचा",
-      settingsTitle: "Accessibility Settings",
+      settingsTitle: "अॅक्सेसिबिलिटी सेटिंग्ज",
+      reset: "सेटिंग्ज रीसेट करा",
     },
     legalContent: {
       privacy: {
