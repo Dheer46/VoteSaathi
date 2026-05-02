@@ -15,7 +15,7 @@ const securityHeaders = [
   },
   {
     key: 'X-Frame-Options',
-    value: 'SAMEORIGIN'
+    value: 'DENY'
   },
   {
     key: 'X-Content-Type-Options',
@@ -23,7 +23,15 @@ const securityHeaders = [
   },
   {
     key: 'Referrer-Policy',
-    value: 'origin-when-cross-origin'
+    value: 'strict-origin-when-cross-origin'
+  },
+  {
+    key: 'Content-Security-Policy',
+    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.google.com *.gstatic.com; style-src 'self' 'unsafe-inline' *.googleapis.com; img-src 'self' data: blob: *.google.com *.gstatic.com; font-src 'self' data: *.gstatic.com *.googleapis.com; connect-src 'self' *.google.com *.googleapis.com *.google-analytics.com; frame-src 'self' *.google.com;"
+  },
+  {
+    key: 'Permissions-Policy',
+    value: 'camera=(), microphone=*, geolocation=(), interest-cohort=()'
   }
 ];
 
