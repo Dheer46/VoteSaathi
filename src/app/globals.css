@@ -174,8 +174,8 @@
 
   .voice-bottom-area {
     background: linear-gradient(to top, rgba(15,12,41,0.98) 60%, transparent);
-    padding-top: 2.5rem;
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-top: 1.5rem;
+    padding-bottom: env(safe-area-inset-bottom, 1rem);
   }
 
   /* Mic button */

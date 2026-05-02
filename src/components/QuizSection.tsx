@@ -106,11 +106,11 @@ export default function QuizSection({ isOpen, onClose }: QuizSectionProps) {
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             className="relative w-full max-w-4xl bg-white rounded-[2.5rem] shadow-2xl border border-border/50 flex flex-col overflow-hidden"
           >
-            <div className="mx-auto w-full p-8 sm:p-12 relative z-10 overflow-y-auto max-h-[90vh]">
-              <div className="flex flex-col items-center text-center mb-12 relative">
+            <div className="mx-auto w-full p-6 sm:p-12 relative z-10 overflow-y-auto max-h-[95vh] sm:max-h-[90vh]">
+              <div className="flex flex-col items-center text-center mb-8 sm:mb-12 relative">
                 <button 
                   onClick={onClose}
-                  className="absolute -top-4 -right-4 h-10 w-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-foreground hover:text-background transition-all cursor-pointer bg-white"
+                  className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 h-10 w-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-foreground hover:text-background transition-all cursor-pointer bg-white z-20 shadow-sm"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -121,13 +121,13 @@ export default function QuizSection({ isOpen, onClose }: QuizSectionProps) {
                 >
                   <Award className="h-3 w-3" /> {t.quiz.badge}
                 </motion.div>
-                <h2 className="text-4xl font-serif font-bold mb-2">{t.quiz.title}</h2>
-                <p className="text-muted-foreground max-w-xl font-light text-sm">
+                <h2 className="text-2xl sm:text-4xl font-serif font-bold mb-2">{t.quiz.title}</h2>
+                <p className="text-muted-foreground max-w-xl font-light text-xs sm:text-sm">
                   {t.quiz.subtitle}
                 </p>
               </div>
 
-              <div className="min-h-[400px] flex flex-col">
+              <div className="min-h-[350px] sm:min-h-[400px] flex flex-col">
           <AnimatePresence mode="wait">
             {!isFinished ? (
               <motion.div

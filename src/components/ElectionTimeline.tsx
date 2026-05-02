@@ -29,9 +29,9 @@ export default function ElectionTimeline() {
   }));
 
   return (
-    <section id="timeline" className="py-32 bg-background noise">
+    <section id="timeline" className="py-20 sm:py-32 bg-background noise">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-20">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
           
           {/* Section Header - Editorial */}
           <div className="lg:w-1/3">
@@ -39,17 +39,17 @@ export default function ElectionTimeline() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="sticky top-32"
+              className="lg:sticky lg:top-32"
             >
-              <h2 className="text-6xl font-serif font-bold leading-[0.9] mb-6">
+              <h2 className="text-4xl sm:text-6xl font-serif font-bold leading-[0.9] mb-6">
                 {t.timeline.countdownTitle} <br/>
                 <span className="gradient-text italic">{t.timeline.countdownAccent}</span>
               </h2>
-              <p className="text-xl text-muted-foreground font-light leading-relaxed">
+              <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed">
                 {t.timeline.countdownSubtitle}
               </p>
               
-              <div className="mt-12 space-y-4">
+              <div className="mt-8 sm:mt-12 space-y-4">
                  <div className="flex items-center gap-3">
                     <div className="h-2 w-2 rounded-full bg-green-500" />
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
@@ -95,7 +95,7 @@ function TimelineItem({ event, index, isLast }: { event: any; index: number; isL
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.6 }}
-      className="group flex gap-12 pb-16 relative"
+      className="group flex gap-6 sm:gap-12 pb-16 relative"
     >
       {/* Line Connector */}
       {!isLast && (

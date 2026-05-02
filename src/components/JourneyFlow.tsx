@@ -54,51 +54,52 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
   }, [activeStep]);
 
   return (
-    <section id="journey" className="py-24 sm:py-32 bg-white overflow-hidden">
+    <section id="journey" className="py-20 sm:py-32 bg-white overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Sidebar Navigation - Editorial Style */}
-          <div className="lg:col-span-4 sticky top-32">
+          <div className="lg:col-span-4 lg:sticky lg:top-32 mb-12 lg:mb-0">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              className="mb-12"
+              className="mb-8 lg:mb-12"
             >
-              <h2 className="text-5xl font-serif font-bold leading-tight mb-4">
+              <h2 className="text-3xl sm:text-5xl font-serif font-bold leading-tight mb-4">
                 {t.journey.title} <br/>
                 <span className="gradient-text italic">{t.journey.titleAccent}</span>
               </h2>
-              <p className="text-muted-foreground font-light text-lg">
+              <p className="text-muted-foreground font-light text-base sm:text-lg">
                 {t.journey.subtitle}
               </p>
             </motion.div>
 
-            <div className="space-y-2 relative">
-              <div className="absolute left-4 top-0 bottom-0 w-px bg-border/50" />
+            <div className="flex lg:flex-col gap-2 lg:gap-2 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 no-scrollbar relative">
+              <div className="absolute left-4 top-0 bottom-0 w-px bg-border/50 hidden lg:block" />
               {JOURNEY_STEPS.map((step, i) => (
                 <button
                    key={step.id}
                    onClick={() => setActiveStep(i)}
-                   className={`group relative flex items-center w-full pl-10 py-3 text-left transition-all cursor-pointer ${
+                   className={`group relative flex items-center flex-shrink-0 lg:flex-none whitespace-nowrap lg:whitespace-normal lg:w-full pl-0 lg:pl-10 py-3 text-left transition-all cursor-pointer ${
                      activeStep === i ? "opacity-100" : "opacity-40 hover:opacity-100"
                    }`}
                 >
-                  <div className={`absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 rounded-full border-2 border-background transition-all ${
+                  <div className={`hidden lg:block absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 rounded-full border-2 border-background transition-all ${
                     activeStep === i ? "bg-saffron scale-125 shadow-lg shadow-saffron/20" : "bg-border"
                   }`} />
-                  <span className={`text-xs font-bold uppercase tracking-widest ${activeStep === i ? "text-foreground" : "text-muted-foreground"}`}>
+                  <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest ${activeStep === i ? "text-foreground" : "text-muted-foreground"}`}>
                     0{i + 1} — {t.journey.steps[i]?.title.split(" ").slice(-1)[0] || t.journey.step}
                   </span>
+                  {activeStep === i && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-saffron lg:hidden" />}
                 </button>
               ))}
             </div>
 
             {/* Progress Counter */}
-            <div className="mt-16 pt-8 border-t border-border/50">
+            <div className="mt-8 lg:mt-16 pt-8 border-t border-border/50">
               <div className="flex justify-between items-end mb-2">
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">{t.journey.progress}</span>
-                <span className="text-3xl font-serif font-bold">{Math.round(progress)}%</span>
+                <span className="text-2xl sm:text-3xl font-serif font-bold">{Math.round(progress)}%</span>
               </div>
               <div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
                 <motion.div 
@@ -119,10 +120,10 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -30 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="grid md:grid-cols-12 gap-0 overflow-hidden rounded-[2.5rem] border border-border shadow-2xl shadow-black/5 bg-white"
+                className="grid md:grid-cols-12 gap-0 overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border border-border shadow-2xl shadow-black/5 bg-white"
               >
                 {/* Image Section */}
-                <div className="md:col-span-5 relative min-h-[300px] md:min-h-full overflow-hidden bg-muted">
+                <div className="md:col-span-5 relative min-h-[250px] md:min-h-full overflow-hidden bg-muted">
                   {stepImages[activeStep] ? (
                     <img 
                       src={stepImages[activeStep]} 
@@ -131,22 +132,22 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
                     />
                   ) : (
                     <div className="absolute inset-0 bg-gradient-to-br from-saffron/10 to-transparent flex items-center justify-center">
-                       <span className="text-9xl font-serif font-bold opacity-[0.03]">{activeStep + 1}</span>
+                       <span className="text-7xl sm:text-9xl font-serif font-bold opacity-[0.03]">{activeStep + 1}</span>
                     </div>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                  <div className="absolute top-6 left-6 h-12 w-12 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white">
+                  <div className="absolute top-4 left-4 sm:top-6 sm:left-6 h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white text-sm sm:text-base">
                     {activeStep + 1}
                   </div>
                 </div>
 
                 {/* Text Section */}
-                <div className="md:col-span-7 p-10 sm:p-14 flex flex-col">
-                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-saffron mb-6">
+                <div className="md:col-span-7 p-8 sm:p-14 flex flex-col">
+                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-saffron mb-4 sm:mb-6">
                     {t.journey.step} {activeStep + 1} {t.journey.of} 7
                   </span>
                   
-                  <h3 className="text-4xl font-serif font-bold leading-tight mb-6">
+                  <h3 className="text-2xl sm:text-4xl font-serif font-bold leading-tight mb-4 sm:mb-6">
                     {stepData.title}
                   </h3>
                   

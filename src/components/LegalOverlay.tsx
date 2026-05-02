@@ -137,28 +137,28 @@ export default function LegalOverlay({ isOpen, onClose, type }: LegalOverlayProp
             className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-[2.5rem] shadow-2xl border border-border/50 flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="p-8 sm:p-12 border-b border-border/50 flex items-start justify-between">
-              <div className="flex items-start gap-6">
-                <div className="h-16 w-16 rounded-2xl bg-muted flex items-center justify-center text-foreground shrink-0">
-                  <Icon className="h-8 w-8" />
+            <div className="p-6 sm:p-8 lg:p-12 border-b border-border/50 flex items-start justify-between">
+              <div className="flex items-start gap-4 sm:gap-6">
+                <div className="h-12 w-12 sm:h-16 sm:w-16 rounded-xl sm:rounded-2xl bg-muted flex items-center justify-center text-foreground shrink-0">
+                  <Icon className="h-6 w-6 sm:h-8 sm:w-8" />
                 </div>
                 <div>
-                  <h2 className="text-4xl sm:text-5xl font-serif font-bold text-foreground mb-2 leading-none">
+                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-bold text-foreground mb-1 sm:mb-2 leading-tight sm:leading-none">
                     {data.title}
                   </h2>
-                  <p className="text-lg text-muted-foreground font-light">{data.subtitle}</p>
+                  <p className="text-sm sm:text-lg text-muted-foreground font-light">{data.subtitle}</p>
                 </div>
               </div>
               <button 
                 onClick={onClose}
-                className="h-12 w-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-foreground hover:text-background transition-all cursor-pointer"
+                className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-foreground hover:text-background transition-all cursor-pointer shrink-0 ml-4"
               >
-                <X className="h-6 w-6" />
+                <X className="h-5 w-5 sm:h-6 sm:w-6" />
               </button>
             </div>
 
             {/* Content Body */}
-            <div className="flex-1 overflow-y-auto p-8 sm:p-12 scrollbar-thin">
+            <div className="flex-1 overflow-y-auto p-6 sm:p-8 lg:p-12 scrollbar-thin">
               {data.content}
             </div>
 

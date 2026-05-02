@@ -8,20 +8,20 @@ import { useLanguage } from "@/context/LanguageContext";
 export default function QuickActions() {
   const { t } = useLanguage();
   return (
-    <section id="actions" className="py-32 bg-white noise">
+    <section id="actions" className="py-20 sm:py-32 bg-white noise">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-end justify-between gap-8 mb-16">
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 mb-12 sm:mb-16">
           <motion.div 
             initial={{ opacity: 0, x: -20 }} 
             whileInView={{ opacity: 1, x: 0 }} 
             viewport={{ once: true }} 
             className="max-w-2xl"
           >
-            <h2 className="text-6xl font-serif font-bold leading-[0.9] mb-6">
+            <h2 className="text-4xl sm:text-6xl font-serif font-bold leading-[0.9] mb-6">
               {t.actions.title} <br/>
               <span className="gradient-text italic">{t.actions.titleAccent}</span>
             </h2>
-            <p className="text-xl text-muted-foreground font-light leading-relaxed">
+            <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed">
               {t.actions.subtitle}
             </p>
           </motion.div>

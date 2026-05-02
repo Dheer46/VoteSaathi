@@ -33,9 +33,9 @@ export default function Navbar() {
     <motion.header
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="fixed top-0 left-0 right-0 z-50 flex justify-center p-6"
+      className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 sm:p-6"
     >
-      <nav className="glass max-w-5xl w-full flex items-center justify-between px-8 py-4 rounded-full border-white/40 ring-1 ring-black/5 shadow-2xl">
+      <nav className="glass max-w-5xl w-full flex items-center justify-between px-4 sm:px-8 py-3 sm:py-4 rounded-full border-white/40 ring-1 ring-black/5 shadow-2xl">
         <div className="flex items-center gap-3">
           <div className="bg-foreground text-background p-1.5 rounded-lg">
             <Command className="h-5 w-5" />

@@ -495,7 +495,7 @@ RULES:
         {/* Conversation History */}
         <div
           ref={scrollRef}
-          className="absolute inset-0 top-20 bottom-72 overflow-y-auto px-6 py-4 voice-scroll"
+          className="absolute inset-0 top-20 bottom-60 sm:bottom-72 overflow-y-auto px-4 sm:px-6 py-4 voice-scroll"
         >
           <div className="max-w-lg mx-auto space-y-4">
             {conversation.map((entry) => (

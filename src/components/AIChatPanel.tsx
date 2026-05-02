@@ -192,24 +192,24 @@ export default function AIChatPanel() {
   };
 
   return (
-    <section id="assistant" className="py-24 bg-white noise relative overflow-hidden">
+    <section id="assistant" className="py-20 sm:py-24 bg-white noise relative overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center mb-16">
+        <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="h-16 w-16 bg-foreground text-background rounded-2xl flex items-center justify-center mb-6 shadow-2xl shadow-black/20"
+            className="h-12 w-12 sm:h-16 sm:w-16 bg-foreground text-background rounded-xl sm:rounded-2xl flex items-center justify-center mb-6 shadow-2xl shadow-black/20"
           >
-            <Sparkles className="h-8 w-8" />
+            <Bot className="h-6 w-6 sm:h-8 sm:w-8" />
           </motion.div>
-          <h2 className="text-5xl font-serif font-bold mb-4">{t.ai.title} <span className="italic">{t.ai.titleAccent}</span> Concierge</h2>
-          <p className="text-muted-foreground max-w-xl font-light">
+          <h2 className="text-3xl sm:text-5xl font-serif font-bold mb-4">{t.ai.title} <span className="italic">{t.ai.titleAccent}</span> Concierge</h2>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-xl font-light">
             {t.ai.subtitle}
           </p>
         </div>
 
-        <div className={`mx-auto transition-all duration-700 ease-[0.16,1,0.3,1] ${isExpanded ? "max-w-6xl h-[800px]" : "max-w-4xl h-[650px]"} relative`}>
-          <div className="glass h-full rounded-[2.5rem] flex flex-col overflow-hidden border-black/5 shadow-2xl">
+        <div className={`mx-auto transition-all duration-700 ease-[0.16,1,0.3,1] ${isExpanded ? "max-w-6xl h-[700px] lg:h-[800px]" : "max-w-4xl h-[550px] sm:h-[650px]"} relative`}>
+          <div className="glass h-full rounded-[1.5rem] sm:rounded-[2.5rem] flex flex-col overflow-hidden border-black/5 shadow-2xl">
             {/* Chat Header */}
             <div className="p-6 border-b border-black/5 flex items-center justify-between bg-white/50">
               <div className="flex items-center gap-4">
@@ -237,7 +237,7 @@ export default function AIChatPanel() {
             {/* Chat Body */}
             <div 
               ref={scrollContainerRef}
-              className="flex-1 overflow-y-auto p-8 space-y-8 scrollbar-thin scrollbar-thumb-black/5"
+              className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-6 sm:space-y-8 scrollbar-thin scrollbar-thumb-black/5"
             >
               {messages.map((msg, i) => (
                 <motion.div
@@ -246,13 +246,13 @@ export default function AIChatPanel() {
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  <div className={`group relative flex items-start gap-4 max-w-[85%] ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
+                  <div className={`group relative flex items-start gap-3 sm:gap-4 max-w-[90%] sm:max-w-[85%] ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
                     <div className={`h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 ${
                       msg.role === "user" ? "bg-foreground text-background" : "bg-saffron/10 text-saffron"
                     }`}>
                       {msg.role === "user" ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
                     </div>
-                    <div className={`p-5 rounded-2xl text-sm leading-relaxed ${
+                    <div className={`p-4 sm:p-5 rounded-xl sm:rounded-2xl text-xs sm:text-sm leading-relaxed ${
                       msg.role === "user" 
                         ? "bg-foreground text-background rounded-tr-none font-medium" 
                         : "bg-white border border-black/5 rounded-tl-none font-light shadow-sm prose prose-sm max-w-none prose-p:leading-relaxed prose-li:my-0.5"

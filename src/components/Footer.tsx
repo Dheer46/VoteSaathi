@@ -18,13 +18,13 @@ export default function Footer({ onOpenLegal }: { onOpenLegal: (type: "privacy" 
           
           {/* Brand & Manifesto */}
           <div className="lg:col-span-5">
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-6 sm:mb-8">
               <div className="bg-foreground text-background p-2 rounded-xl">
                 <Command className="h-6 w-6" />
               </div>
-              <span className="text-2xl font-serif font-bold tracking-tight uppercase">VoteSaathi</span>
+              <span className="text-xl sm:text-2xl font-serif font-bold tracking-tight uppercase">VoteSaathi</span>
             </div>
-            <p className="text-xl text-muted-foreground font-light leading-relaxed max-w-md mb-10">
+            <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed max-w-md mb-8 sm:mb-10">
               {t.footer.description}
             </p>
             <div className="flex items-center gap-6">
