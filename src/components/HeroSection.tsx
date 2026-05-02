@@ -48,10 +48,10 @@ export default function HeroSection({ onStartJourney, onOpenChat, onOpenVoice }:
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl sm:text-7xl lg:text-8xl font-serif text-foreground leading-[0.9] mb-8"
+              className="text-5xl sm:text-7xl lg:text-8xl font-serif text-foreground leading-[1] sm:leading-[0.9] mb-8"
             >
               <span className="block italic font-light opacity-80">{t.hero.title}</span>
-              <span className="block gradient-text relative">
+              <span className="block gradient-text relative py-2">
                 {t.hero.titleAccent}
                 <motion.div 
                   initial={{ width: 0 }}

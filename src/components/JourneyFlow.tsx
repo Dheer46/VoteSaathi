@@ -65,9 +65,9 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
               whileInView={{ opacity: 1, x: 0 }}
               className="mb-8 lg:mb-12"
             >
-              <h2 className="text-3xl sm:text-5xl font-serif font-bold leading-tight mb-4">
+              <h2 className="text-3xl sm:text-5xl font-serif font-bold leading-[1.1] mb-4">
                 {t.journey.title} <br/>
-                <span className="gradient-text italic">{t.journey.titleAccent}</span>
+                <span className="gradient-text italic block py-1">{t.journey.titleAccent}</span>
               </h2>
               <p className="text-muted-foreground font-light text-base sm:text-lg">
                 {t.journey.subtitle}
@@ -142,50 +142,52 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
                 </div>
 
                 {/* Text Section */}
-                <div className="md:col-span-7 p-8 sm:p-14 flex flex-col">
-                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-saffron mb-4 sm:mb-6">
+                <div className="md:col-span-7 p-6 sm:p-14 flex flex-col">
+                  <span className="block text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em] sm:tracking-[0.4em] text-saffron mb-2 sm:mb-6">
                     {t.journey.step} {activeStep + 1} {t.journey.of} 7
                   </span>
                   
-                  <h3 className="text-2xl sm:text-4xl font-serif font-bold leading-tight mb-4 sm:mb-6">
+                  <h3 className="text-2xl sm:text-4xl font-serif font-bold leading-[1.1] mb-4 sm:mb-6">
                     {stepData.title}
                   </h3>
                   
-                  <p className="text-muted-foreground text-lg font-light leading-relaxed mb-8">
+                  <p className="text-muted-foreground text-base sm:text-lg font-light leading-relaxed mb-6 sm:mb-8">
                     {stepData.description}
                   </p>
 
-                  <div className="space-y-5 mb-10 flex-grow">
+                  <div className="space-y-4 sm:space-y-5 mb-8 sm:mb-10 flex-grow">
                     {stepData.bullets.map((bullet, i) => (
                       <motion.div
                         key={i}
                         initial={{ opacity: 0, x: 10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3 + i * 0.1 }}
-                        className="flex items-start gap-4"
+                        className="flex items-start gap-3 sm:gap-4"
                       >
-                        <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-saffron flex-shrink-0" />
+                        <div className="mt-1.5 h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-saffron flex-shrink-0" />
                         <p className="text-sm text-foreground/80 leading-relaxed font-medium">{bullet}</p>
                       </motion.div>
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-4 pt-8 border-t border-border/50">
-                    <Button
-                      variant="outline"
-                      onClick={goPrev}
-                      disabled={activeStep === 0}
-                      className="flex-1 h-14 rounded-2xl border-border hover:bg-muted font-bold text-xs uppercase tracking-widest cursor-pointer disabled:opacity-20"
-                    >
-                      <ChevronLeft className="h-4 w-4 mr-2" /> {t.journey.prev}
-                    </Button>
-                    <Button
-                      onClick={goNext}
-                      className="flex-[2] h-14 rounded-2xl bg-foreground text-background hover:bg-saffron transition-colors font-bold text-xs uppercase tracking-widest cursor-pointer"
-                    >
-                      {activeStep === JOURNEY_STEPS.length - 1 ? t.journey.complete : t.journey.next} 
-                      <ArrowRight className="h-4 w-4 ml-2" />
-                    </Button>
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-border/50">
+                    <div className="flex gap-3 w-full">
+                      <Button
+                        variant="outline"
+                        onClick={goPrev}
+                        disabled={activeStep === 0}
+                        className="flex-1 h-12 sm:h-14 rounded-xl sm:rounded-2xl border-border hover:bg-muted font-bold text-[10px] sm:text-xs uppercase tracking-widest cursor-pointer disabled:opacity-20"
+                      >
+                        <ChevronLeft className="h-4 w-4 mr-1 sm:mr-2" /> {t.journey.prev}
+                      </Button>
+                      <Button
+                        onClick={goNext}
+                        className="flex-[2] h-12 sm:h-14 rounded-xl sm:rounded-2xl bg-foreground text-background hover:bg-saffron transition-colors font-bold text-[10px] sm:text-xs uppercase tracking-widest cursor-pointer"
+                      >
+                        {activeStep === JOURNEY_STEPS.length - 1 ? t.journey.complete : t.journey.next} 
+                        <ArrowRight className="h-4 w-4 ml-1 sm:mr-2" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -197,12 +199,12 @@ export default function JourneyFlow({ onComplete }: { onComplete?: () => void })
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="mt-8 p-6 rounded-3xl bg-saffron/5 border border-saffron/10 flex gap-4 items-center"
+              className="mt-6 sm:mt-8 p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-saffron/5 border border-saffron/10 flex gap-3 sm:gap-4 items-center"
             >
-              <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center shadow-sm text-saffron">
-                <Lightbulb className="h-5 w-5" />
+              <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-white flex-shrink-0 flex items-center justify-center shadow-sm text-saffron">
+                <Lightbulb className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
-              <p className="text-sm font-medium text-foreground/80 italic">
+              <p className="text-xs sm:text-sm font-medium text-foreground/80 italic">
                 {stepData.tip}
               </p>
             </motion.div>

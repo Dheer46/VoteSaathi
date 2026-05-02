@@ -17,9 +17,9 @@ export default function QuickActions() {
             viewport={{ once: true }} 
             className="max-w-2xl"
           >
-            <h2 className="text-4xl sm:text-6xl font-serif font-bold leading-[0.9] mb-6">
+            <h2 className="text-4xl sm:text-6xl font-serif font-bold leading-[1] sm:leading-[0.9] mb-6">
               {t.actions.title} <br/>
-              <span className="gradient-text italic">{t.actions.titleAccent}</span>
+              <span className="gradient-text italic block py-1">{t.actions.titleAccent}</span>
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed">
               {t.actions.subtitle}

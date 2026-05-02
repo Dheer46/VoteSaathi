@@ -41,9 +41,9 @@ export default function ElectionTimeline() {
               viewport={{ once: true }}
               className="lg:sticky lg:top-32"
             >
-              <h2 className="text-4xl sm:text-6xl font-serif font-bold leading-[0.9] mb-6">
+              <h2 className="text-4xl sm:text-6xl font-serif font-bold leading-[1] sm:leading-[0.9] mb-6">
                 {t.timeline.countdownTitle} <br/>
-                <span className="gradient-text italic">{t.timeline.countdownAccent}</span>
+                <span className="gradient-text italic block py-1">{t.timeline.countdownAccent}</span>
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed">
                 {t.timeline.countdownSubtitle}
